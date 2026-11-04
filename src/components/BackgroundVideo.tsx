@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from 'react';
 
+// ==============================================================
+// CHANGE BACKGROUND VIDEO HERE:
+// Put your video file in /public/bg.mp4 (served as /bg.mp4)
+// Or paste any video URL here:
+// ==============================================================
+export const BACKGROUND_VIDEO_SRC = '/bg.mp4';
+
 export const BackgroundVideo: React.FC = () => {
   const [videoFailed, setVideoFailed] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
   useEffect(() => {
-    // Check user preference for reduced motion
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     setPrefersReducedMotion(mediaQuery.matches);
 
@@ -32,11 +38,11 @@ export const BackgroundVideo: React.FC = () => {
           muted
           loop
           playsInline
+          src={BACKGROUND_VIDEO_SRC}
           className="absolute inset-0 w-full h-full object-cover"
           onError={() => setVideoFailed(true)}
         >
-          <source src="/bg.mp4" type="video/mp4" />
-          <source src="/public/bg.mp4" type="video/mp4" />
+          <source src={BACKGROUND_VIDEO_SRC} type="video/mp4" onError={() => setVideoFailed(true)} />
         </video>
       )}
 
@@ -46,7 +52,7 @@ export const BackgroundVideo: React.FC = () => {
         style={{ backgroundColor: 'rgba(10, 20, 51, 0.82)' }}
       />
 
-      {/* Subtle technical grid texture (calibrated 1px grid lines with low opacity for science exhibition feel) */}
+      {/* Subtle technical grid texture */}
       <div
         className="absolute inset-0 w-full h-full opacity-15"
         style={{
