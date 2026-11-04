@@ -14,6 +14,10 @@ import {
   ShoppingBag,
   Building2,
   Droplet,
+  HeartPulse,
+  Users2,
+  Globe2,
+  Award,
 } from 'lucide-react';
 
 // Import bundled assets for Vite
@@ -425,53 +429,152 @@ export const HomePage: React.FC<HomePageProps> = ({
             </div>
           </div>
 
-          {/* 3. SUPPORTS UN SUSTAINABLE DEVELOPMENT GOALS */}
-          <div className="mt-12 pt-8 border-t border-[#2F86FF]/20">
-            <span className="text-xs uppercase font-mono tracking-widest text-[#2F86FF] font-bold block mb-4">
-              SUPPORTS UN SUSTAINABLE DEVELOPMENT GOALS
-            </span>
+          {/* 3. SUPPORTS UN SUSTAINABLE DEVELOPMENT GOALS (SDGs WE ARE FULFILLING) */}
+          <div className="mt-14 pt-10 border-t border-[#2F86FF]/25">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6">
+              <div>
+                <span className="text-xs uppercase font-mono tracking-widest text-[#2F86FF] font-bold flex items-center gap-1.5 mb-1">
+                  <Globe2 className="w-3.5 h-3.5 text-[#2F86FF]" />
+                  UN 2030 Agenda Alignment
+                </span>
+                <h3 className="font-heading font-black text-2xl sm:text-3xl text-white">
+                  UN Sustainable Development Goals We Are Fulfilling
+                </h3>
+              </div>
+              <span className="text-xs font-mono text-[#C6F432] bg-[#C6F432]/10 px-3 py-1 rounded-full border border-[#C6F432]/30 shrink-0">
+                4 Primary SDG Targets
+              </span>
+            </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {/* SDG 3 */}
-              <div className="p-4 rounded-xl bg-[#3BB54A] text-white flex items-center gap-3.5 shadow-lg">
-                <span className="text-4xl font-heading font-black leading-none shrink-0">3</span>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* SDG 3: Good Health and Well-Being */}
+              <div className="p-5 rounded-2xl bg-[#060B1C]/80 border border-[#3BB54A]/40 flex flex-col justify-between alaya-card-hover group">
                 <div>
-                  <div className="font-heading font-bold text-sm leading-snug">Good health</div>
-                  <div className="text-xs opacity-90">and well-being</div>
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 rounded-xl bg-[#3BB54A] text-white font-heading font-black text-2xl flex items-center justify-center shadow-[0_0_15px_rgba(59,181,74,0.4)]">
+                        3
+                      </div>
+                      <div>
+                        <h4 className="font-heading font-bold text-base text-white">
+                          Good Health & Well-Being
+                        </h4>
+                        <span className="text-[11px] font-mono text-[#3BB54A] font-medium">
+                          UN Target 3.3 & 3.9 (Infectious Disease Control)
+                        </span>
+                      </div>
+                    </div>
+                    <HeartPulse className="w-5 h-5 text-[#3BB54A] group-hover:scale-110 transition-transform" />
+                  </div>
+                  <p className="text-xs text-[#9AA3B5] leading-relaxed">
+                    <strong>How ALAYA fulfills it:</strong> Breaks transmission chains of water-borne pathogens, E. coli, and respiratory irritants in school washrooms. Real-time VOC chemical verification ensures bacteria are genuinely neutralized rather than masked.
+                  </p>
+                </div>
+                <div className="mt-4 pt-3 border-t border-[#3BB54A]/20 flex items-center justify-between text-[11px] font-mono text-[#3BB54A]">
+                  <span>Airborne pathogen reduction</span>
+                  <span>100% verified sanitization</span>
                 </div>
               </div>
 
-              {/* SDG 5 */}
-              <div className="p-4 rounded-xl bg-[#E0525A] text-white flex items-center gap-3.5 shadow-lg">
-                <span className="text-4xl font-heading font-black leading-none shrink-0">5</span>
+              {/* SDG 5: Gender Equality */}
+              <div className="p-5 rounded-2xl bg-[#060B1C]/80 border border-[#E0525A]/40 flex flex-col justify-between alaya-card-hover group">
                 <div>
-                  <div className="font-heading font-bold text-sm leading-snug">Gender</div>
-                  <div className="text-xs opacity-90">equality</div>
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 rounded-xl bg-[#E0525A] text-white font-heading font-black text-2xl flex items-center justify-center shadow-[0_0_15px_rgba(224,82,90,0.4)]">
+                        5
+                      </div>
+                      <div>
+                        <h4 className="font-heading font-bold text-base text-white">
+                          Gender Equality
+                        </h4>
+                        <span className="text-[11px] font-mono text-[#E0525A] font-medium">
+                          UN Target 5.1 & 5.5 (Menstrual Hygiene Dignity)
+                        </span>
+                      </div>
+                    </div>
+                    <Users2 className="w-5 h-5 text-[#E0525A] group-hover:scale-110 transition-transform" />
+                  </div>
+                  <p className="text-xs text-[#9AA3B5] leading-relaxed">
+                    <strong>How ALAYA fulfills it:</strong> Tackles the #1 cause of female school absenteeism in India—unusable and neglected student toilets. Guarantees safe, hygienic, and dignified sanitation facilities so female students never have to miss classes.
+                  </p>
+                </div>
+                <div className="mt-4 pt-3 border-t border-[#E0525A]/20 flex items-center justify-between text-[11px] font-mono text-[#E0525A]">
+                  <span>Reduces female dropout rates</span>
+                  <span>Private & safe facilities</span>
                 </div>
               </div>
 
-              {/* SDG 6 */}
-              <div className="p-4 rounded-xl bg-[#00A3DA] text-white flex items-center gap-3.5 shadow-lg">
-                <span className="text-4xl font-heading font-black leading-none shrink-0">6</span>
+              {/* SDG 6: Clean Water and Sanitation */}
+              <div className="p-5 rounded-2xl bg-[#060B1C]/80 border border-[#00A3DA]/40 flex flex-col justify-between alaya-card-hover group">
                 <div>
-                  <div className="font-heading font-bold text-sm leading-snug">Clean water</div>
-                  <div className="text-xs opacity-90">and sanitation</div>
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 rounded-xl bg-[#00A3DA] text-white font-heading font-black text-2xl flex items-center justify-center shadow-[0_0_15px_rgba(0,163,218,0.4)]">
+                        6
+                      </div>
+                      <div>
+                        <h4 className="font-heading font-bold text-base text-white">
+                          Clean Water & Sanitation
+                        </h4>
+                        <span className="text-[11px] font-mono text-[#00A3DA] font-medium">
+                          UN Target 6.2 (Equitable Sanitation & Hygiene)
+                        </span>
+                      </div>
+                    </div>
+                    <Droplet className="w-5 h-5 text-[#00A3DA] group-hover:scale-110 transition-transform" />
+                  </div>
+                  <p className="text-xs text-[#9AA3B5] leading-relaxed">
+                    <strong>How ALAYA fulfills it:</strong> Direct realization of UN Target 6.2: <em>"Access to adequate and equitable sanitation and hygiene for all"</em>. Eliminates soap outages with acoustic level sensors and prevents slip-and-fall hazards with floor conductivity probes.
+                  </p>
+                </div>
+                <div className="mt-4 pt-3 border-t border-[#00A3DA]/20 flex items-center justify-between text-[11px] font-mono text-[#00A3DA]">
+                  <span>Zero empty soap dispensers</span>
+                  <span>Proactive spill alarms</span>
                 </div>
               </div>
 
-              {/* SDG 9 */}
-              <div className="p-4 rounded-xl bg-[#F58220] text-white flex items-center gap-3.5 shadow-lg">
-                <span className="text-4xl font-heading font-black leading-none shrink-0">9</span>
+              {/* SDG 9: Industry, Innovation and Infrastructure */}
+              <div className="p-5 rounded-2xl bg-[#060B1C]/80 border border-[#F58220]/40 flex flex-col justify-between alaya-card-hover group">
                 <div>
-                  <div className="font-heading font-bold text-sm leading-snug">Industry, innovation</div>
-                  <div className="text-xs opacity-90">and infrastructure</div>
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 rounded-xl bg-[#F58220] text-white font-heading font-black text-2xl flex items-center justify-center shadow-[0_0_15px_rgba(245,130,32,0.4)]">
+                        9
+                      </div>
+                      <div>
+                        <h4 className="font-heading font-bold text-base text-white">
+                          Industry & Innovation
+                        </h4>
+                        <span className="text-[11px] font-mono text-[#F58220] font-medium">
+                          UN Target 9.4 (Sustainable Low-Cost Retrofit)
+                        </span>
+                      </div>
+                    </div>
+                    <Cpu className="w-5 h-5 text-[#F58220] group-hover:scale-110 transition-transform" />
+                  </div>
+                  <p className="text-xs text-[#9AA3B5] leading-relaxed">
+                    <strong>How ALAYA fulfills it:</strong> Democratizes smart facility monitoring. Instead of ₹1,50,000 enterprise proprietary building systems, ALAYA delivers an open-source ₹2,000 Arduino Uno edge node that retrofits existing public school washrooms instantly.
+                  </p>
+                </div>
+                <div className="mt-4 pt-3 border-t border-[#F58220]/20 flex items-center justify-between text-[11px] font-mono text-[#F58220]">
+                  <span>₹2,000 Open hardware BOM</span>
+                  <span>Zero subscription lock-in</span>
                 </div>
               </div>
             </div>
 
-            {/* Bottom Footer Callout from Image 2 */}
-            <div className="text-center mt-6 text-xs text-[#9AA3B5] font-sans">
-              Also supports the <strong className="text-white font-semibold">Swachh Bharat Mission</strong>
+            {/* National Mission Callout Banner */}
+            <div className="mt-6 p-4 rounded-xl bg-[#060B1C] border border-[#2F86FF]/30 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+              <div className="flex items-center gap-2.5">
+                <Award className="w-4 h-4 text-[#C6F432] shrink-0" />
+                <span className="text-white">
+                  Also directly supports the Government of India's <strong className="text-[#C6F432]">Swachh Bharat Mission</strong> & <strong className="text-[#2F86FF]">Swachh Vidyalaya Initiative</strong>.
+                </span>
+              </div>
+              <span className="text-[11px] font-mono text-[#9AA3B5] shrink-0">
+                Ministry of Education Aligned
+              </span>
             </div>
           </div>
         </div>

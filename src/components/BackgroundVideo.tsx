@@ -27,7 +27,7 @@ export const BackgroundVideo: React.FC = () => {
       {/* Animated Gradient Fallback (Active when video fails or reduced motion is preferred) */}
       <div
         className={`absolute inset-0 w-full h-full ${
-          prefersReducedMotion ? 'bg-[#0A1433]' : 'alaya-gradient-bg'
+          prefersReducedMotion ? 'bg-[#060B1C]' : 'alaya-gradient-bg'
         } transition-opacity duration-1000`}
       />
 
@@ -46,10 +46,10 @@ export const BackgroundVideo: React.FC = () => {
         </video>
       )}
 
-      {/* Mandatory Deep Navy Overlay: rgba(10, 20, 51, 0.82) */}
+      {/* Deeper Midnight Navy Overlay: rgba(6, 11, 28, 0.92) */}
       <div
         className="absolute inset-0 w-full h-full"
-        style={{ backgroundColor: 'rgba(10, 20, 51, 0.82)' }}
+        style={{ backgroundColor: 'rgba(6, 11, 28, 0.92)' }}
       />
 
       {/* Subtle technical grid texture */}
