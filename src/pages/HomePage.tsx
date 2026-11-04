@@ -16,14 +16,18 @@ import {
   Droplet,
 } from 'lucide-react';
 
+// Import bundled assets for Vite
+import heroDevicePhoto from '../assets/images/alaya_arduino_box_prototype_1793812969113.jpg';
+import whereNextPhoto from '../assets/images/where_alaya_goes_next_infographic_1793812990186.jpg';
+
 // =====================================================================
 // 📸 CHANGE HOME PAGE PHOTOS HERE (CODE MEIN YAHAAN SE CHANGE KAREIN):
 // =====================================================================
 // 1. Hero Device Photo (1st Image on Main Page - Arduino Prototype Box):
-export const HERO_DEVICE_PHOTO = '/src/assets/images/alaya_arduino_box_prototype_1793812969113.jpg';
+export const HERO_DEVICE_PHOTO = heroDevicePhoto || '/hero_prototype.jpg';
 
 // 2. Where ALAYA Goes Next Infographic (2nd Image Down Below):
-export const ROADMAP_INFOGRAPHIC_PHOTO = '/src/assets/images/where_alaya_goes_next_infographic_1793812990186.jpg';
+export const ROADMAP_INFOGRAPHIC_PHOTO = whereNextPhoto || '/where_alaya_goes_next.jpg';
 // =====================================================================
 
 interface HomePageProps {
@@ -116,6 +120,10 @@ export const HomePage: React.FC<HomePageProps> = ({
                 <div className="relative rounded-xl overflow-hidden aspect-[4/3] bg-[#0A1433]">
                   <img
                     src={HERO_DEVICE_PHOTO}
+                    onError={(e) => {
+                      e.currentTarget.onerror = null;
+                      e.currentTarget.src = '/hero_prototype.jpg';
+                    }}
                     alt="ALAYA Physical Hardware Prototype Box with Arduino Uno, MQ-135 Gas Sensor, LCD reading CUS: 45 AMBER, LEDs, and PIR Dome Sensor"
                     referrerPolicy="no-referrer"
                     className="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-700"
@@ -302,6 +310,20 @@ export const HomePage: React.FC<HomePageProps> = ({
               <span className="w-3 h-3 rounded-full bg-[#F5B301] shadow-[0_0_8px_#F5B301]" />
               <span className="w-3 h-3 rounded-full bg-[#E0525A] shadow-[0_0_8px_#E0525A]" />
             </div>
+          </div>
+
+          {/* 2nd Image Banner: Where ALAYA goes next Infographic */}
+          <div className="mt-8 mb-8 rounded-2xl overflow-hidden border border-[#2F86FF]/40 shadow-2xl bg-[#0A1433] relative group">
+            <img
+              src={ROADMAP_INFOGRAPHIC_PHOTO}
+              onError={(e) => {
+                e.currentTarget.onerror = null;
+                e.currentTarget.src = '/where_alaya_goes_next.jpg';
+              }}
+              alt="Where ALAYA goes next roadmap, schools, hospitals, metro, and UN SDGs"
+              referrerPolicy="no-referrer"
+              className="w-full h-auto object-contain rounded-2xl"
+            />
           </div>
 
           {/* 1. WHERE IT HELPS */}
