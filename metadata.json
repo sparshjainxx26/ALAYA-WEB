@@ -1,0 +1,6 @@
+{
+  "name": "ALAYA - Smart Hygiene Monitor",
+  "description": "AI-enabled Lavatory & Hygiene Assistant. Camera-free smart washroom hygiene monitor with real-time Arduino Web Serial telemetry and predictive analytics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
