@@ -1,14 +1,29 @@
 import React from 'react';
-import { ArrowRight, ShieldCheck, TrendingUp, EyeOff, Sparkles, Activity, Cpu, CheckCircle2, MapPin } from 'lucide-react';
+import {
+  ArrowRight,
+  ShieldCheck,
+  TrendingUp,
+  EyeOff,
+  Sparkles,
+  Activity,
+  Cpu,
+  CheckCircle2,
+  School,
+  Train,
+  Cross,
+  ShoppingBag,
+  Building2,
+  Droplet,
+} from 'lucide-react';
 
 // =====================================================================
 // 📸 CHANGE HOME PAGE PHOTOS HERE (CODE MEIN YAHAAN SE CHANGE KAREIN):
 // =====================================================================
-// 1. Hero Device Photo (Hero section ke right side me):
-export const HERO_DEVICE_PHOTO = '/src/assets/images/alaya_smart_box_hero_1793812160975.jpg';
+// 1. Hero Device Photo (1st Image on Main Page - Arduino Prototype Box):
+export const HERO_DEVICE_PHOTO = '/src/assets/images/alaya_arduino_box_prototype_1793812969113.jpg';
 
-// 2. Washroom Installation Photo (Deployment architecture section me):
-export const INSTALLATION_PHOTO = '/src/assets/images/alaya_device_installation_1793812160798.jpg';
+// 2. Where ALAYA Goes Next Infographic (2nd Image Down Below):
+export const ROADMAP_INFOGRAPHIC_PHOTO = '/src/assets/images/where_alaya_goes_next_infographic_1793812990186.jpg';
 // =====================================================================
 
 interface HomePageProps {
@@ -24,7 +39,9 @@ export const HomePage: React.FC<HomePageProps> = ({
 }) => {
   return (
     <div className="relative w-full">
-      {/* Hero Section with Split Grid featuring the ALAYA Smart Box Photo */}
+      {/* =========================================================================
+          HERO SECTION: 1st Image at Main Page (Physical Arduino Box Prototype)
+         ========================================================================= */}
       <section className="min-h-[85vh] flex flex-col justify-center max-w-7xl mx-auto px-4 sm:px-8 py-12 lg:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left Column: Typography & CTAs (7 cols) */}
@@ -88,7 +105,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             </div>
           </div>
 
-          {/* Right Column: Hero Photo Showcase of ALAYA Smart Box (5 cols) */}
+          {/* Right Column: 1st Image Showcase (ALAYA Arduino Prototype Box) */}
           <div className="lg:col-span-5">
             <div className="relative group">
               {/* Outer decorative glow */}
@@ -96,10 +113,10 @@ export const HomePage: React.FC<HomePageProps> = ({
 
               {/* Main Photo Card */}
               <div className="relative alaya-card p-3 overflow-hidden shadow-2xl">
-                <div className="relative rounded-xl overflow-hidden aspect-[16/10] sm:aspect-[4/3] bg-[#0A1433]">
+                <div className="relative rounded-xl overflow-hidden aspect-[4/3] bg-[#0A1433]">
                   <img
                     src={HERO_DEVICE_PHOTO}
-                    alt="ALAYA Smart Washroom Hardware Unit with Green, Amber, Red Status LEDs and Sniffing Grille"
+                    alt="ALAYA Physical Hardware Prototype Box with Arduino Uno, MQ-135 Gas Sensor, LCD reading CUS: 45 AMBER, LEDs, and PIR Dome Sensor"
                     referrerPolicy="no-referrer"
                     className="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-700"
                   />
@@ -111,7 +128,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   <div className="absolute top-3 inset-x-3 flex items-center justify-between pointer-events-none">
                     <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#101C40]/90 backdrop-blur-md border border-[#2F86FF]/40 text-[11px] font-mono text-[#C6F432]">
                       <span className="w-2 h-2 rounded-full bg-[#C6F432] animate-pulse" />
-                      <span>Hardware Prototype v2.4</span>
+                      <span>Physical Working Prototype</span>
                     </div>
 
                     <div className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#101C40]/90 backdrop-blur-md border border-[#2F86FF]/40 text-[11px] font-mono text-white">
@@ -123,19 +140,19 @@ export const HomePage: React.FC<HomePageProps> = ({
                   {/* Photo Caption / Callouts */}
                   <div className="absolute bottom-3 inset-x-3 p-3 rounded-lg bg-[#101C40]/95 backdrop-blur-md border border-[#2F86FF]/30">
                     <div className="flex items-center justify-between text-xs font-mono">
-                      <span className="text-white font-bold">ALAYA Sensor Node Unit</span>
-                      <span className="text-[#C6F432]">₹2,000 BOM</span>
+                      <span className="text-white font-bold">ALAYA Arduino Box Hardware</span>
+                      <span className="text-[#F5B301] font-bold">LCD: CUS: 45 | AMBER</span>
                     </div>
-                    <div className="mt-1 flex items-center gap-3 text-[11px] text-[#9AA3B5]">
-                      <span className="flex items-center gap-1">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#3BB54A]" />
-                        Traffic Light LEDs
-                      </span>
+                    <div className="mt-1.5 flex flex-wrap items-center gap-2 text-[10px] font-mono text-[#9AA3B5]">
+                      <span className="text-white">Arduino Uno</span>
                       <span>·</span>
-                      <span className="flex items-center gap-1">
-                        <Activity className="w-3 h-3 text-[#2F86FF]" />
-                        VOC Gas Grille
-                      </span>
+                      <span className="text-[#2F86FF]">MQ-135 Air Sensor</span>
+                      <span>·</span>
+                      <span className="text-[#3BB54A]">Green</span>
+                      <span className="text-[#F5B301]">Amber</span>
+                      <span className="text-[#E0525A]">Red LEDs</span>
+                      <span>·</span>
+                      <span className="text-[#C6F432]">PIR Dome</span>
                     </div>
                   </div>
                 </div>
@@ -144,8 +161,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           </div>
         </div>
 
-        {/* The Exact Stats Strip from prompt */}
-        {/* "4 sensors · 1-second checks · 0 cameras · ₹2,000 per washroom" */}
+        {/* Stats Strip */}
         <div className="mt-16 pt-8 border-t border-[#2F86FF]/25">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
             <div className="p-4 rounded-xl bg-[#101C40]/60 border border-[#2F86FF]/25">
@@ -264,72 +280,176 @@ export const HomePage: React.FC<HomePageProps> = ({
         </div>
       </section>
 
-      {/* Visual Showcase: Real-World Washroom Deployment Photo */}
+      {/* =========================================================================
+          2nd IMAGE DOWN BELOW: "Where ALAYA goes next" Complete Architecture Section
+         ========================================================================= */}
       <section className="max-w-7xl mx-auto px-4 sm:px-8 py-12">
-        <div className="alaya-card p-6 sm:p-8 border-[#2F86FF]/40">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            {/* Left Image Showcase (5 cols) */}
-            <div className="lg:col-span-5 order-2 lg:order-1">
-              <div className="relative rounded-2xl overflow-hidden border border-[#2F86FF]/30 shadow-xl group aspect-[4/3] bg-[#0A1433]">
-                <img
-                  src={INSTALLATION_PHOTO}
-                  alt="ALAYA Smart Hygiene Unit Installed in Modern School Restroom Facility"
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0A1433] via-transparent to-transparent opacity-60" />
+        <div className="alaya-card p-6 sm:p-10 border-[#2F86FF]/50 relative overflow-hidden bg-[#101C40]">
+          {/* Top Title & Traffic Light Motif */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#2F86FF]/20">
+            <div>
+              <h2 className="font-heading font-black text-3xl sm:text-4xl text-white tracking-tight">
+                Where ALAYA goes next
+              </h2>
+              <p className="text-base text-[#9AA3B5] mt-1 font-sans">
+                Anywhere crowds use washrooms, one unit per washroom.
+              </p>
+            </div>
 
-                <div className="absolute bottom-3 left-3 right-3 p-2.5 rounded-lg bg-[#101C40]/90 backdrop-blur-md border border-[#2F86FF]/30 text-xs font-mono text-white flex items-center justify-between">
-                  <span className="flex items-center gap-1.5">
-                    <MapPin className="w-3.5 h-3.5 text-[#2F86FF]" />
-                    <span>Basin & Mirror Zone</span>
-                  </span>
-                  <span className="text-[#C6F432]">Touchless Monitoring</span>
+            {/* Traffic Light Motif */}
+            <div className="flex items-center gap-2 self-start sm:self-center px-3 py-1.5 rounded-full bg-[#0A1433] border border-[#2F86FF]/30">
+              <span className="w-3 h-3 rounded-full bg-[#3BB54A] shadow-[0_0_8px_#3BB54A]" />
+              <span className="w-3 h-3 rounded-full bg-[#F5B301] shadow-[0_0_8px_#F5B301]" />
+              <span className="w-3 h-3 rounded-full bg-[#E0525A] shadow-[0_0_8px_#E0525A]" />
+            </div>
+          </div>
+
+          {/* 1. WHERE IT HELPS */}
+          <div className="mt-8">
+            <span className="text-xs uppercase font-mono tracking-widest text-[#2F86FF] font-bold block mb-4">
+              WHERE IT HELPS
+            </span>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5">
+              {/* Schools */}
+              <div className="p-4 rounded-xl bg-[#0A1433] border border-[#2F86FF]/40 flex flex-col items-center text-center justify-center gap-3 alaya-card-hover group">
+                <div className="w-12 h-12 rounded-lg bg-[#2F86FF]/10 border border-[#2F86FF]/30 flex items-center justify-center text-[#C6F432] group-hover:scale-110 transition-transform">
+                  <School className="w-6 h-6" />
+                </div>
+                <span className="font-heading font-bold text-sm text-white">Schools</span>
+              </div>
+
+              {/* Metro & railway */}
+              <div className="p-4 rounded-xl bg-[#0A1433] border border-[#2F86FF]/40 flex flex-col items-center text-center justify-center gap-3 alaya-card-hover group">
+                <div className="w-12 h-12 rounded-lg bg-[#2F86FF]/10 border border-[#2F86FF]/30 flex items-center justify-center text-[#2F86FF] group-hover:scale-110 transition-transform">
+                  <Train className="w-6 h-6" />
+                </div>
+                <span className="font-heading font-bold text-sm text-white">Metro & railway</span>
+              </div>
+
+              {/* Hospitals */}
+              <div className="p-4 rounded-xl bg-[#0A1433] border border-[#2F86FF]/40 flex flex-col items-center text-center justify-center gap-3 alaya-card-hover group">
+                <div className="w-12 h-12 rounded-lg bg-[#2F86FF]/10 border border-[#2F86FF]/30 flex items-center justify-center text-[#C6F432] group-hover:scale-110 transition-transform">
+                  <Cross className="w-6 h-6" />
+                </div>
+                <span className="font-heading font-bold text-sm text-white">Hospitals</span>
+              </div>
+
+              {/* Public toilets */}
+              <div className="p-4 rounded-xl bg-[#0A1433] border border-[#2F86FF]/40 flex flex-col items-center text-center justify-center gap-3 alaya-card-hover group">
+                <div className="w-12 h-12 rounded-lg bg-[#2F86FF]/10 border border-[#2F86FF]/30 flex items-center justify-center text-[#C6F432] group-hover:scale-110 transition-transform">
+                  <Droplet className="w-6 h-6" />
+                </div>
+                <span className="font-heading font-bold text-sm text-white">Public toilets</span>
+              </div>
+
+              {/* Malls & offices */}
+              <div className="p-4 rounded-xl bg-[#0A1433] border border-[#2F86FF]/40 flex flex-col items-center text-center justify-center gap-3 alaya-card-hover group col-span-2 sm:col-span-1">
+                <div className="w-12 h-12 rounded-lg bg-[#2F86FF]/10 border border-[#2F86FF]/30 flex items-center justify-center text-[#2F86FF] group-hover:scale-110 transition-transform">
+                  <ShoppingBag className="w-6 h-6" />
+                </div>
+                <span className="font-heading font-bold text-sm text-white">Malls & offices</span>
+              </div>
+            </div>
+          </div>
+
+          {/* 2. ROADMAP */}
+          <div className="mt-10">
+            <span className="text-xs uppercase font-mono tracking-widest text-[#2F86FF] font-bold block mb-6">
+              ROADMAP
+            </span>
+
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 relative">
+              {/* Connecting line on desktop */}
+              <div className="hidden md:block absolute top-7 left-12 right-12 h-0.5 bg-[#2F86FF]/30 -z-0" />
+
+              {/* Step 1: Prototype (NOW) */}
+              <div className="relative z-10 flex flex-col items-center text-center">
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold text-[#C6F432] border border-[#C6F432]/60 bg-[#C6F432]/10 mb-2">
+                  NOW
+                </span>
+                <div className="w-12 h-12 rounded-full bg-[#C6F432] text-[#0A1433] font-heading font-black text-lg flex items-center justify-center shadow-[0_0_20px_rgba(198,244,50,0.5)]">
+                  1
+                </div>
+                <h4 className="font-heading font-bold text-base text-[#C6F432] mt-3">Prototype</h4>
+                <p className="text-xs text-[#9AA3B5] mt-1">Arduino box, working now</p>
+              </div>
+
+              {/* Step 2: Upgrade */}
+              <div className="relative z-10 flex flex-col items-center text-center mt-6 md:mt-0">
+                <div className="w-12 h-12 rounded-full bg-[#101C40] border-2 border-[#2F86FF] text-[#2F86FF] font-heading font-black text-lg flex items-center justify-center shadow-[0_0_15px_rgba(47,134,255,0.3)] mt-6">
+                  2
+                </div>
+                <h4 className="font-heading font-bold text-base text-white mt-3">Upgrade</h4>
+                <p className="text-xs text-[#9AA3B5] mt-1">ESP32 WiFi + MQ137 ammonia sensor</p>
+              </div>
+
+              {/* Step 3: School pilot */}
+              <div className="relative z-10 flex flex-col items-center text-center mt-6 md:mt-0">
+                <div className="w-12 h-12 rounded-full bg-[#101C40] border-2 border-[#2F86FF] text-[#2F86FF] font-heading font-black text-lg flex items-center justify-center shadow-[0_0_15px_rgba(47,134,255,0.3)] mt-6">
+                  3
+                </div>
+                <h4 className="font-heading font-bold text-base text-white mt-3">School pilot</h4>
+                <p className="text-xs text-[#9AA3B5] mt-1">one month in our school washrooms</p>
+              </div>
+
+              {/* Step 4: City scale */}
+              <div className="relative z-10 flex flex-col items-center text-center mt-6 md:mt-0">
+                <div className="w-12 h-12 rounded-full bg-[#101C40] border-2 border-[#2F86FF] text-[#2F86FF] font-heading font-black text-lg flex items-center justify-center shadow-[0_0_15px_rgba(47,134,255,0.3)] mt-6">
+                  4
+                </div>
+                <h4 className="font-heading font-bold text-base text-white mt-3">City scale</h4>
+                <p className="text-xs text-[#9AA3B5] mt-1">public toilets under Swachh Bharat</p>
+              </div>
+            </div>
+          </div>
+
+          {/* 3. SUPPORTS UN SUSTAINABLE DEVELOPMENT GOALS */}
+          <div className="mt-12 pt-8 border-t border-[#2F86FF]/20">
+            <span className="text-xs uppercase font-mono tracking-widest text-[#2F86FF] font-bold block mb-4">
+              SUPPORTS UN SUSTAINABLE DEVELOPMENT GOALS
+            </span>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {/* SDG 3 */}
+              <div className="p-4 rounded-xl bg-[#3BB54A] text-white flex items-center gap-3.5 shadow-lg">
+                <span className="text-4xl font-heading font-black leading-none shrink-0">3</span>
+                <div>
+                  <div className="font-heading font-bold text-sm leading-snug">Good health</div>
+                  <div className="text-xs opacity-90">and well-being</div>
+                </div>
+              </div>
+
+              {/* SDG 5 */}
+              <div className="p-4 rounded-xl bg-[#E0525A] text-white flex items-center gap-3.5 shadow-lg">
+                <span className="text-4xl font-heading font-black leading-none shrink-0">5</span>
+                <div>
+                  <div className="font-heading font-bold text-sm leading-snug">Gender</div>
+                  <div className="text-xs opacity-90">equality</div>
+                </div>
+              </div>
+
+              {/* SDG 6 */}
+              <div className="p-4 rounded-xl bg-[#00A3DA] text-white flex items-center gap-3.5 shadow-lg">
+                <span className="text-4xl font-heading font-black leading-none shrink-0">6</span>
+                <div>
+                  <div className="font-heading font-bold text-sm leading-snug">Clean water</div>
+                  <div className="text-xs opacity-90">and sanitation</div>
+                </div>
+              </div>
+
+              {/* SDG 9 */}
+              <div className="p-4 rounded-xl bg-[#F58220] text-white flex items-center gap-3.5 shadow-lg">
+                <span className="text-4xl font-heading font-black leading-none shrink-0">9</span>
+                <div>
+                  <div className="font-heading font-bold text-sm leading-snug">Industry, innovation</div>
+                  <div className="text-xs opacity-90">and infrastructure</div>
                 </div>
               </div>
             </div>
 
-            {/* Right Information Details (7 cols) */}
-            <div className="lg:col-span-7 order-1 lg:order-2 space-y-4">
-              <span className="text-xs uppercase font-mono text-[#C6F432] tracking-wider font-semibold">
-                Physical Deployment Architecture
-              </span>
-              <h3 className="font-heading font-extrabold text-2xl sm:text-3xl text-white">
-                Installed in Seconds, Zero Infrastructure Overhaul
-              </h3>
-              <p className="text-sm text-[#9AA3B5] leading-relaxed">
-                ALAYA mounts non-destructively beside washbasin mirrors or entryway door frames.
-                Operating on 5V USB power from an Arduino Uno, it connects effortlessly to laptops or
-                school administration PCs via the Web Serial API—no proprietary cloud subscription fees required.
-              </p>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs">
-                <div className="p-3 rounded-xl bg-[#0A1433] border border-[#2F86FF]/20 flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-[#C6F432] shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-bold text-white">Non-Intrusive Mounting</span>
-                    <p className="text-[#9AA3B5] mt-0.5">Dual-adhesive or screw-mount bracket at 1.4m height.</p>
-                  </div>
-                </div>
-
-                <div className="p-3 rounded-xl bg-[#0A1433] border border-[#2F86FF]/20 flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-[#C6F432] shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-bold text-white">Continuous Self-Recalibration</span>
-                    <p className="text-[#9AA3B5] mt-0.5">Air baseline auto-adjusts for seasonal humidity.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="pt-2">
-                <button
-                  onClick={() => onNavigate('dashboard')}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-heading font-bold text-xs text-white bg-[#2F86FF] hover:bg-[#2570d8] transition-colors"
-                >
-                  Inspect Live Hardware Readings
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
-              </div>
+            {/* Bottom Footer Callout from Image 2 */}
+            <div className="text-center mt-6 text-xs text-[#9AA3B5] font-sans">
+              Also supports the <strong className="text-white font-semibold">Swachh Bharat Mission</strong>
             </div>
           </div>
         </div>
