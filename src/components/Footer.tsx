@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface FooterProps {
-  onNavigate: (tab: 'home' | 'dashboard' | 'report' | 'how-it-works' | 'privacy') => void;
+  onNavigate: (tab: 'home' | 'dashboard' | 'circuit' | 'report' | 'how-it-works' | 'privacy') => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
@@ -26,6 +26,9 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           </button>
           <button onClick={() => onNavigate('dashboard')} className="hover:text-white transition-colors">
             Live Dashboard
+          </button>
+          <button onClick={() => onNavigate('circuit')} className="hover:text-[#C6F432] transition-colors">
+            Circuit Explorer
           </button>
           <button onClick={() => onNavigate('report')} className="hover:text-white transition-colors">
             Report

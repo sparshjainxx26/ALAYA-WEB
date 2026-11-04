@@ -1,11 +1,13 @@
 import React from 'react';
 import { ConnectionStatus } from '../types';
+import { Award, Zap, Cpu } from 'lucide-react';
 
 interface NavbarProps {
-  activeTab: 'home' | 'dashboard' | 'report' | 'how-it-works' | 'privacy';
-  onNavigate: (tab: 'home' | 'dashboard' | 'report' | 'how-it-works' | 'privacy') => void;
+  activeTab: 'home' | 'dashboard' | 'circuit' | 'report' | 'how-it-works' | 'privacy';
+  onNavigate: (tab: 'home' | 'dashboard' | 'circuit' | 'report' | 'how-it-works' | 'privacy') => void;
   connectionStatus: ConnectionStatus;
   currentBand: 0 | 1 | 2;
+  onOpenJudgeMode: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -13,10 +15,12 @@ export const Navbar: React.FC<NavbarProps> = ({
   onNavigate,
   connectionStatus,
   currentBand,
+  onOpenJudgeMode,
 }) => {
-  const navItems: Array<{ id: 'home' | 'dashboard' | 'report' | 'how-it-works' | 'privacy'; label: string }> = [
+  const navItems: Array<{ id: 'home' | 'dashboard' | 'circuit' | 'report' | 'how-it-works' | 'privacy'; label: string; badge?: string }> = [
     { id: 'home', label: 'Home' },
     { id: 'dashboard', label: 'Live Dashboard' },
+    { id: 'circuit', label: 'Circuit Explorer', badge: 'X-Ray' },
     { id: 'report', label: 'Report' },
     { id: 'how-it-works', label: 'How it works' },
     { id: 'privacy', label: 'Privacy' },
@@ -24,12 +28,12 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <div className="sticky top-3 sm:top-4 z-50 w-full px-3 sm:px-6 pointer-events-none transition-all duration-300">
-      <header className="pointer-events-auto max-w-6xl mx-auto floating-navbar rounded-2xl sm:rounded-full px-4 sm:px-6 py-2.5 sm:py-3 transition-all duration-300">
-        <div className="flex items-center justify-between gap-4">
+      <header className="pointer-events-auto max-w-7xl mx-auto floating-navbar rounded-2xl sm:rounded-full px-4 sm:px-6 py-2.5 sm:py-3 transition-all duration-300">
+        <div className="flex items-center justify-between gap-3">
           {/* Zone 1: Brand Wordmark */}
           <button
             onClick={() => onNavigate('home')}
-            className="flex items-center gap-2.5 text-left group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2F86FF] rounded-full"
+            className="flex items-center gap-2.5 text-left group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2F86FF] rounded-full shrink-0"
           >
             <div className="w-8 h-8 rounded-full bg-[#101C40] border border-[#2F86FF]/60 flex items-center justify-center text-[#2F86FF] font-heading font-black text-sm shadow-[0_0_10px_rgba(47,134,255,0.3)] group-hover:border-[#C6F432] group-hover:text-[#C6F432] transition-colors">
               A
@@ -52,23 +56,39 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <button
                   key={item.id}
                   onClick={() => onNavigate(item.id)}
-                  className={`px-3.5 py-1.5 text-xs font-semibold rounded-full transition-all duration-200 whitespace-nowrap shrink-0 ${
+                  className={`px-3 py-1.5 text-xs font-semibold rounded-full transition-all duration-200 whitespace-nowrap shrink-0 flex items-center gap-1.5 ${
                     isActive
                       ? 'text-[#C6F432] bg-[#2F86FF]/20 border border-[#2F86FF]/50 shadow-[0_0_15px_rgba(47,134,255,0.25)]'
                       : 'text-[#9AA3B5] hover:text-white hover:bg-white/5'
                   }`}
                 >
-                  {item.label}
+                  <span>{item.label}</span>
+                  {item.badge && (
+                    <span className="text-[9px] font-mono font-bold uppercase px-1.5 py-0.2 rounded-full bg-[#C6F432]/20 text-[#C6F432] border border-[#C6F432]/40">
+                      {item.badge}
+                    </span>
+                  )}
                 </button>
               );
             })}
           </nav>
 
-          {/* Zone 3: Traffic Light Motif & Connection Status */}
-          <div className="flex items-center gap-3 shrink-0">
+          {/* Zone 3: Judge Mode Button + Traffic Light Motif & Connection Status */}
+          <div className="flex items-center gap-2 sm:gap-3 shrink-0">
+            {/* Judge Mode Trigger Button */}
+            <button
+              onClick={onOpenJudgeMode}
+              className="relative inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 text-xs font-bold uppercase tracking-wider rounded-full bg-gradient-to-r from-[#F5B301]/20 to-[#C6F432]/20 hover:from-[#F5B301]/30 hover:to-[#C6F432]/30 text-[#C6F432] border border-[#C6F432]/60 shadow-[0_0_15px_rgba(198,244,50,0.25)] hover:shadow-[0_0_20px_rgba(198,244,50,0.45)] transition-all whitespace-nowrap active:scale-95 group cursor-pointer"
+              title="Open School Science Exhibition Judge Pitch Console"
+            >
+              <Award className="w-3.5 h-3.5 text-[#F5B301] group-hover:rotate-12 transition-transform" />
+              <span className="font-heading font-black tracking-wide">Judge Mode</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#C6F432] animate-pulse" />
+            </button>
+
             {/* Traffic Light Motif */}
             <div
-              className="flex items-center gap-2 px-3 py-1.5 bg-[#0A1433]/90 border border-[#2F86FF]/40 rounded-full shadow-inner"
+              className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 bg-[#0A1433]/90 border border-[#2F86FF]/40 rounded-full shadow-inner"
               title={`Hygiene Status: ${currentBand === 0 ? 'Clean (Green)' : currentBand === 1 ? 'Plan a Clean (Amber)' : 'Clean Now (Red)'}`}
               aria-label="Hygiene Traffic Light Indicator"
             >
@@ -101,7 +121,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Quick Hardware Action / Dashboard CTA */}
             <button
               onClick={() => onNavigate('dashboard')}
-              className="hidden sm:inline-flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider rounded-full bg-[#2F86FF]/15 text-[#2F86FF] hover:bg-[#2F86FF] hover:text-white border border-[#2F86FF]/40 shadow-[0_0_15px_rgba(47,134,255,0.15)] transition-all whitespace-nowrap"
+              className="hidden lg:inline-flex items-center gap-2 px-3 py-1.5 text-xs font-semibold uppercase tracking-wider rounded-full bg-[#2F86FF]/15 text-[#2F86FF] hover:bg-[#2F86FF] hover:text-white border border-[#2F86FF]/40 shadow-[0_0_15px_rgba(47,134,255,0.15)] transition-all whitespace-nowrap"
             >
               <span
                 className={`w-2 h-2 rounded-full ${
@@ -122,15 +142,15 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
 
         {/* Mobile Navigation bar */}
-        <div className="flex md:hidden items-center justify-around pt-2 mt-2 border-t border-[#2F86FF]/20 overflow-x-auto">
+        <div className="flex md:hidden items-center gap-1 pt-2 mt-2 border-t border-[#2F86FF]/20 overflow-x-auto no-scrollbar">
           {navItems.map((item) => {
             const isActive = activeTab === item.id;
             return (
               <button
                 key={item.id}
                 onClick={() => onNavigate(item.id)}
-                className={`px-2 py-1 text-[11px] font-semibold whitespace-nowrap rounded-lg transition-colors ${
-                  isActive ? 'text-[#C6F432] bg-[#2F86FF]/15 font-bold' : 'text-[#9AA3B5]'
+                className={`px-2.5 py-1 text-[11px] font-semibold whitespace-nowrap rounded-lg transition-colors shrink-0 ${
+                  isActive ? 'text-[#C6F432] bg-[#2F86FF]/20 font-bold' : 'text-[#9AA3B5]'
                 }`}
               >
                 {item.label}
