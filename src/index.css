@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --font-heading: 'Montserrat', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --font-heading: 'Outfit', 'Montserrat', sans-serif;
+  --font-body: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --color-alaya-navy: #0A1433;
   --color-alaya-panel: #101C40;
@@ -16,13 +16,15 @@
 }
 
 :root {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
   background-color: #0A1433;
   color: #FFFFFF;
+  letter-spacing: -0.01em;
 }
 
 h1, h2, h3, h4, h5, h6, .font-heading {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Outfit', 'Montserrat', sans-serif;
+  letter-spacing: -0.025em;
 }
 
 body {
@@ -30,6 +32,7 @@ body {
   color: #FFFFFF;
   margin: 0;
   overflow-x: hidden;
+  font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
 }
 
 /* Background animated gradient for fallback & reduced-motion */
@@ -65,6 +68,82 @@ body {
 .alaya-card-hover:hover {
   border-color: rgba(47, 134, 255, 0.7);
   box-shadow: 0 8px 30px rgba(10, 20, 51, 0.6);
+}
+
+/* Floating Navbar Glass effect */
+.floating-navbar {
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(16, 28, 64, 0.75);
+  border: 1px solid rgba(47, 134, 255, 0.35);
+  box-shadow: 0 10px 30px -10px rgba(10, 20, 51, 0.8), 0 0 20px -5px rgba(47, 134, 255, 0.2);
+}
+
+/* Opening Text Animations (Staggered Entrance) */
+@keyframes heroEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(22px);
+    filter: blur(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes shimmerGlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-open-1 {
+  animation: heroEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+.animate-open-2 {
+  animation: heroEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+}
+
+.animate-open-3 {
+  animation: heroEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+}
+
+.animate-open-4 {
+  animation: heroEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.55s both;
+}
+
+.animate-open-5 {
+  animation: heroEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.7s both;
+}
+
+.animate-open-6 {
+  animation: heroEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.85s both;
+}
+
+.animate-open-card {
+  animation: heroEntrance 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.45s both;
+}
+
+/* Gradient text utility */
+.text-gradient-electric {
+  background: linear-gradient(135deg, #FFFFFF 30%, #90C1FF 70%, #2F86FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-lime {
+  background: linear-gradient(135deg, #FFFFFF 20%, #E3FFA8 60%, #C6F432 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* Custom subtle scrollbar in navy tones */

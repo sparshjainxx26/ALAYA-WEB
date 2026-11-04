@@ -51,42 +51,42 @@ export const HomePage: React.FC<HomePageProps> = ({
           {/* Left Column: Typography & CTAs (7 cols) */}
           <div className="lg:col-span-7">
             {/* Science Exhibition Category */}
-            <div className="flex flex-wrap items-center gap-2 mb-4 text-xs font-mono">
-              <span className="text-[#C6F432] font-semibold bg-[#C6F432]/10 px-2.5 py-1 rounded-md border border-[#C6F432]/30 flex items-center gap-1.5">
+            <div className="flex flex-wrap items-center gap-2 mb-4 text-xs font-mono animate-open-1">
+              <span className="text-[#C6F432] font-semibold bg-[#C6F432]/10 px-3 py-1 rounded-full border border-[#C6F432]/35 flex items-center gap-1.5 shadow-[0_0_12px_rgba(198,244,50,0.15)]">
                 <Sparkles className="w-3.5 h-3.5" />
                 School Science Exhibition 2026
               </span>
               <span className="text-[#9AA3B5]">·</span>
-              <span className="text-[#2F86FF] font-medium">IoT & Embedded Systems Category</span>
+              <span className="text-[#2F86FF] font-medium tracking-wide">IoT & Embedded Systems Category</span>
             </div>
 
             {/* Big ALAYA Wordmark & Subtitle */}
-            <h1 className="font-heading font-black text-6xl sm:text-7xl lg:text-8xl tracking-tight text-white mb-2">
+            <h1 className="font-heading font-black text-6xl sm:text-7xl lg:text-8xl tracking-[-0.04em] text-white mb-2 animate-open-2 drop-shadow-[0_0_40px_rgba(47,134,255,0.3)]">
               ALAYA
             </h1>
-            <p className="font-heading font-bold text-xl sm:text-2xl text-[#2F86FF] mb-2 tracking-wide">
+            <p className="font-heading font-extrabold text-2xl sm:text-3xl lg:text-4xl text-gradient-electric mb-2 tracking-[-0.02em] animate-open-3">
               AI-enabled Lavatory & Hygiene Assistant
             </p>
 
-            <p className="font-heading text-lg sm:text-xl text-[#C6F432] font-semibold italic mb-4">
+            <p className="font-mono text-lg sm:text-xl text-gradient-lime font-bold italic mb-4 animate-open-4">
               "clean restrooms, predicted"
             </p>
 
-            <p className="text-xl sm:text-2xl text-white/95 font-medium leading-relaxed max-w-2xl mb-6">
+            <p className="text-xl sm:text-2xl text-white/95 font-medium leading-relaxed max-w-2xl mb-6 tracking-tight animate-open-5">
               Measures the room, not the person.
             </p>
 
-            <p className="text-sm sm:text-base text-[#9AA3B5] leading-relaxed max-w-xl mb-8">
+            <p className="text-sm sm:text-base text-[#9AA3B5] leading-relaxed max-w-xl mb-8 animate-open-6 font-normal">
               A camera-free smart washroom hygiene monitor built on Arduino Uno and edge micro-telemetry.
               ALAYA warns maintenance teams before restrooms turn unhygienic, verifies chemical sanitizer
               application, and respects student privacy with zero optical sensors.
             </p>
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-3.5">
+            <div className="flex flex-wrap items-center gap-3.5 animate-open-6">
               <button
                 onClick={() => onNavigate('dashboard')}
-                className="inline-flex items-center gap-3 px-6 py-3.5 rounded-xl font-heading font-bold text-sm text-white bg-[#2F86FF] hover:bg-[#2570d8] shadow-[0_0_25px_rgba(47,134,255,0.4)] transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+                className="inline-flex items-center gap-3 px-6 py-3.5 rounded-full font-heading font-bold text-sm text-white bg-[#2F86FF] hover:bg-[#2570d8] shadow-[0_0_30px_rgba(47,134,255,0.45)] hover:shadow-[0_0_35px_rgba(47,134,255,0.6)] transition-all transform hover:-translate-y-0.5 active:translate-y-0"
               >
                 Open Live Dashboard
                 <ArrowRight className="w-4 h-4" />
@@ -94,14 +94,14 @@ export const HomePage: React.FC<HomePageProps> = ({
 
               <button
                 onClick={() => onNavigate('report')}
-                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl font-heading font-bold text-sm text-[#C6F432] bg-[#101C40] border border-[#2F86FF]/40 hover:border-[#C6F432] hover:bg-[#101C40]/80 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full font-heading font-bold text-sm text-[#C6F432] bg-[#101C40] border border-[#2F86FF]/50 hover:border-[#C6F432] hover:bg-[#101C40]/80 shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0"
               >
                 Report a problem
               </button>
 
               <button
                 onClick={onStartSimulator}
-                className="inline-flex items-center gap-2 px-4 py-3.5 rounded-xl font-mono text-xs text-[#9AA3B5] hover:text-white border border-[#2F86FF]/20 hover:border-[#2F86FF]/50 bg-[#0A1433]/70 transition-all"
+                className="inline-flex items-center gap-2 px-4 py-3.5 rounded-full font-mono text-xs text-[#9AA3B5] hover:text-white border border-[#2F86FF]/30 hover:border-[#2F86FF]/70 bg-[#0A1433]/80 backdrop-blur-md transition-all"
               >
                 <Cpu className="w-4 h-4 text-[#2F86FF]" />
                 Demo Simulator
@@ -110,7 +110,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           </div>
 
           {/* Right Column: 1st Image Showcase (ALAYA Arduino Prototype Box) */}
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-5 animate-open-card">
             <div className="relative group">
               {/* Outer decorative glow */}
               <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-[#2F86FF]/30 to-[#C6F432]/30 opacity-70 blur-xl group-hover:opacity-100 transition duration-500" />
