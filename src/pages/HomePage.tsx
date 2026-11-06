@@ -35,17 +35,15 @@ export const ROADMAP_INFOGRAPHIC_PHOTO = whereNextPhoto || '/where_alaya_goes_ne
 // =====================================================================
 
 interface HomePageProps {
-  onNavigate: (tab: 'home' | 'dashboard' | 'circuit' | 'report' | 'how-it-works' | 'privacy') => void;
+  onNavigate: (tab: 'home' | 'dashboard' | 'report' | 'how-it-works' | 'privacy') => void;
   onConnectBox: () => void;
   isSerialSupported: boolean;
   onStartSimulator: () => void;
-  onOpenJudgeMode?: () => void;
 }
 
 export const HomePage: React.FC<HomePageProps> = ({
   onNavigate,
   onStartSimulator,
-  onOpenJudgeMode,
 }) => {
   return (
     <div className="relative w-full">
@@ -89,45 +87,28 @@ export const HomePage: React.FC<HomePageProps> = ({
             </p>
 
             {/* Action Buttons */}
-            <div className="flex flex-wrap items-center gap-3 animate-open-6">
+            <div className="flex flex-wrap items-center gap-3.5 animate-open-6">
               <button
                 onClick={() => onNavigate('dashboard')}
-                className="inline-flex items-center gap-2.5 px-5 py-3 rounded-full font-heading font-bold text-sm text-white bg-[#2F86FF] hover:bg-[#2570d8] shadow-[0_0_25px_rgba(47,134,255,0.4)] hover:shadow-[0_0_30px_rgba(47,134,255,0.55)] transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+                className="inline-flex items-center gap-3 px-6 py-3.5 rounded-full font-heading font-bold text-sm text-white bg-[#2F86FF] hover:bg-[#2570d8] shadow-[0_0_30px_rgba(47,134,255,0.45)] hover:shadow-[0_0_35px_rgba(47,134,255,0.6)] transition-all transform hover:-translate-y-0.5 active:translate-y-0"
               >
                 Open Live Dashboard
                 <ArrowRight className="w-4 h-4" />
               </button>
 
               <button
-                onClick={() => onNavigate('circuit')}
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-full font-heading font-bold text-sm text-[#C6F432] bg-[#101C40] border border-[#C6F432]/60 hover:bg-[#C6F432]/10 shadow-[0_0_20px_rgba(198,244,50,0.2)] transition-all transform hover:-translate-y-0.5 active:translate-y-0"
-              >
-                <Cpu className="w-4 h-4 text-[#C6F432]" />
-                Circuit Digital Twin
-              </button>
-
-              {onOpenJudgeMode && (
-                <button
-                  onClick={onOpenJudgeMode}
-                  className="inline-flex items-center gap-2 px-4 py-3 rounded-full font-heading font-bold text-xs uppercase tracking-wider text-[#F5B301] bg-[#F5B301]/10 border border-[#F5B301]/40 hover:bg-[#F5B301]/20 shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0"
-                >
-                  <Award className="w-4 h-4 text-[#F5B301]" />
-                  Judge Mode
-                </button>
-              )}
-
-              <button
                 onClick={() => onNavigate('report')}
-                className="inline-flex items-center gap-2 px-4 py-3 rounded-full font-heading font-medium text-xs text-[#9AA3B5] hover:text-white bg-[#0A1433]/80 border border-[#2F86FF]/30 hover:border-[#2F86FF]/60 transition-all"
+                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full font-heading font-bold text-sm text-[#C6F432] bg-[#101C40] border border-[#2F86FF]/50 hover:border-[#C6F432] hover:bg-[#101C40]/80 shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0"
               >
                 Report a problem
               </button>
 
               <button
                 onClick={onStartSimulator}
-                className="inline-flex items-center gap-1.5 px-3.5 py-3 rounded-full font-mono text-xs text-[#9AA3B5] hover:text-white border border-[#2F86FF]/25 hover:border-[#2F86FF]/50 bg-[#0A1433]/60 transition-all"
+                className="inline-flex items-center gap-2 px-4 py-3.5 rounded-full font-mono text-xs text-[#9AA3B5] hover:text-white border border-[#2F86FF]/30 hover:border-[#2F86FF]/70 bg-[#0A1433]/80 backdrop-blur-md transition-all"
               >
-                Simulator
+                <Cpu className="w-4 h-4 text-[#2F86FF]" />
+                Demo Simulator
               </button>
             </div>
           </div>
@@ -186,15 +167,6 @@ export const HomePage: React.FC<HomePageProps> = ({
                       <span className="text-[#C6F432]">PIR Dome</span>
                     </div>
 
-                    {/* Quick jump to Circuit Digital Twin */}
-                    <button
-                      onClick={() => onNavigate('circuit')}
-                      className="mt-2.5 w-full py-1.5 px-3 rounded-md bg-[#2F86FF]/20 hover:bg-[#2F86FF]/30 border border-[#2F86FF]/50 text-white text-[11px] font-mono font-semibold flex items-center justify-center gap-2 transition-all hover:text-[#C6F432] group"
-                    >
-                      <Cpu className="w-3.5 h-3.5 text-[#C6F432] group-hover:rotate-12 transition-transform" />
-                      <span>Launch X-Ray Circuit Explorer & Oscilloscope</span>
-                      <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
-                    </button>
                   </div>
                 </div>
               </div>

@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useEffect, useRef } from 'react';
-import { AlayaTelemetry, ConnectionStatus, EventLogEntry, TelemetryHistoryPoint } from './types';
+import { AlayaTelemetry, ConnectionStatus, EventLogEntry, TelemetryHistoryPoint, ActiveReportItem } from './types';
 import { serialManager, INITIAL_TELEMETRY, isWebSerialSupported } from './services/serialManager';
 import { BackgroundVideo } from './components/BackgroundVideo';
 import { Navbar } from './components/Navbar';
@@ -14,17 +14,38 @@ import { DashboardPage } from './pages/DashboardPage';
 import { ReportPage } from './pages/ReportPage';
 import { HowItWorksPage } from './pages/HowItWorksPage';
 import { PrivacyPage } from './pages/PrivacyPage';
-import { CircuitExplorerPage } from './pages/CircuitExplorerPage';
-import { JudgeModeModal } from './components/JudgeModeModal';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<'home' | 'dashboard' | 'circuit' | 'report' | 'how-it-works' | 'privacy'>('home');
-  const [isJudgeModeOpen, setIsJudgeModeOpen] = useState<boolean>(false);
+  const [activeTab, setActiveTab] = useState<'home' | 'dashboard' | 'report' | 'how-it-works' | 'privacy'>('home');
   const [telemetry, setTelemetry] = useState<AlayaTelemetry>(INITIAL_TELEMETRY);
   const [connectionStatus, setConnectionStatus] = useState<ConnectionStatus>('disconnected');
   const [history, setHistory] = useState<TelemetryHistoryPoint[]>([]);
   const [eventLogs, setEventLogs] = useState<EventLogEntry[]>([]);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [activeReports, setActiveReports] = useState<ActiveReportItem[]>([
+    {
+      id: 'INC-2041',
+      category: 'soap',
+      categoryLabel: 'Soap Dispenser Empty',
+      location: 'Ground Floor - Science Wing',
+      notes: 'Left dispenser nozzle empty',
+      time: '10:14 AM',
+      timestamp: Date.now() - 360000,
+      severity: 'medium',
+      status: 'active',
+    },
+    {
+      id: 'INC-1988',
+      category: 'floor',
+      categoryLabel: 'Wet / Slippery Floor',
+      location: '1st Floor - Senior School Wing',
+      notes: 'Water pooled near washbasin entry',
+      time: '09:42 AM',
+      timestamp: Date.now() - 1800000,
+      severity: 'urgent',
+      status: 'resolved',
+    },
+  ]);
 
   // Initialize seed telemetry history and event logs
   useEffect(() => {
@@ -132,7 +153,7 @@ export default function App() {
     serialManager.startSimulator();
   };
 
-  const handleNavigate = (tab: 'home' | 'dashboard' | 'circuit' | 'report' | 'how-it-works' | 'privacy') => {
+  const handleNavigate = (tab: 'home' | 'dashboard' | 'report' | 'how-it-works' | 'privacy') => {
     setActiveTab(tab);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -141,18 +162,50 @@ export default function App() {
     setEventLogs([]);
   };
 
+  const handleAddReport = (newReport: ActiveReportItem) => {
+    setActiveReports((prev) => [newReport, ...prev]);
+    showToast(`New Report Logged: ${newReport.categoryLabel}`);
+    setTelemetry((prev) => {
+      const nextCus = Math.min(100, Number((prev.cus + 25).toFixed(1)));
+      const nextBand = nextCus >= 70 ? 2 : nextCus >= 40 ? 1 : 0;
+      return {
+        ...prev,
+        reports: prev.reports + 1,
+        cus: nextCus,
+        band: nextBand,
+      };
+    });
+  };
+
+  const handleResolveReport = (reportId: string) => {
+    setActiveReports((prev) =>
+      prev.map((r) => (r.id === reportId ? { ...r, status: 'resolved' as const } : r))
+    );
+    showToast(`Report #${reportId} marked as resolved!`);
+    serialManager.logEvent(`Incident #${reportId} marked RESOLVED by facility staff.`, 'system');
+    setTelemetry((prev) => {
+      const nextCus = Math.max(10, Number((prev.cus - 15).toFixed(1)));
+      const nextBand = nextCus >= 70 ? 2 : nextCus >= 40 ? 1 : 0;
+      return {
+        ...prev,
+        reports: Math.max(0, prev.reports - 1),
+        cus: nextCus,
+        band: nextBand,
+      };
+    });
+  };
+
   return (
     <div className="relative min-h-screen text-white flex flex-col font-sans">
       {/* Full-screen Background Video with darker rgba(6, 11, 28, 0.92) overlay */}
       <BackgroundVideo />
 
-      {/* Top Navigation Bar with Traffic Light Motif and Judge Mode Trigger */}
+      {/* Top Navigation Bar with Traffic Light Motif */}
       <Navbar
         activeTab={activeTab}
         onNavigate={handleNavigate}
         connectionStatus={connectionStatus}
         currentBand={telemetry.band}
-        onOpenJudgeMode={() => setIsJudgeModeOpen(true)}
       />
 
       {/* Toast Notification Banner */}
@@ -171,7 +224,6 @@ export default function App() {
             onConnectBox={handleConnectBox}
             isSerialSupported={isWebSerialSupported()}
             onStartSimulator={handleStartSimulator}
-            onOpenJudgeMode={() => setIsJudgeModeOpen(true)}
           />
         )}
 
@@ -181,6 +233,9 @@ export default function App() {
             history={history}
             eventLogs={eventLogs}
             connectionStatus={connectionStatus}
+            activeReports={activeReports}
+            onResolveReport={handleResolveReport}
+            onNavigateToReport={() => handleNavigate('report')}
             onConnect={handleConnectBox}
             onDisconnect={handleDisconnectBox}
             onStartSimulator={handleStartSimulator}
@@ -188,12 +243,11 @@ export default function App() {
           />
         )}
 
-        {activeTab === 'circuit' && <CircuitExplorerPage />}
-
         {activeTab === 'report' && (
           <ReportPage
             connectionStatus={connectionStatus}
             onNavigateToDashboard={() => handleNavigate('dashboard')}
+            onSubmitReport={handleAddReport}
           />
         )}
 
@@ -201,21 +255,6 @@ export default function App() {
 
         {activeTab === 'privacy' && <PrivacyPage />}
       </main>
-
-      {/* Judge Mode Modal / Pitch Console */}
-      <JudgeModeModal
-        isOpen={isJudgeModeOpen}
-        onClose={() => setIsJudgeModeOpen(false)}
-        connectionStatus={connectionStatus}
-        onNavigateToDashboard={() => {
-          setIsJudgeModeOpen(false);
-          handleNavigate('dashboard');
-        }}
-        onNavigateToExplorer={() => {
-          setIsJudgeModeOpen(false);
-          handleNavigate('circuit');
-        }}
-      />
 
       {/* Footer */}
       <Footer onNavigate={handleNavigate} />

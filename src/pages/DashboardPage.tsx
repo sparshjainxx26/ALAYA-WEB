@@ -1,5 +1,5 @@
 import React from 'react';
-import { AlayaTelemetry, ConnectionStatus, EventLogEntry, TelemetryHistoryPoint } from '../types';
+import { AlayaTelemetry, ConnectionStatus, EventLogEntry, TelemetryHistoryPoint, ActiveReportItem } from '../types';
 import { CircularGauge } from '../components/CircularGauge';
 import { PredictionCard } from '../components/PredictionCard';
 import { AirQualityCard } from '../components/AirQualityCard';
@@ -10,13 +10,16 @@ import { ScoreBreakdown } from '../components/ScoreBreakdown';
 import { CommandPanel } from '../components/CommandPanel';
 import { EventLogPanel } from '../components/EventLogPanel';
 import { isWebSerialSupported } from '../services/serialManager';
-import { Usb, Power, AlertTriangle, Play, Sparkles, CheckCircle2 } from 'lucide-react';
+import { Usb, Power, AlertTriangle, Play, Sparkles, CheckCircle2, MessageSquare, Clock, MapPin, Check, PlusCircle } from 'lucide-react';
 
 interface DashboardPageProps {
   telemetry: AlayaTelemetry;
   history: TelemetryHistoryPoint[];
   eventLogs: EventLogEntry[];
   connectionStatus: ConnectionStatus;
+  activeReports: ActiveReportItem[];
+  onResolveReport: (id: string) => void;
+  onNavigateToReport: () => void;
   onConnect: () => void;
   onDisconnect: () => void;
   onStartSimulator: () => void;
@@ -28,6 +31,9 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
   history,
   eventLogs,
   connectionStatus,
+  activeReports,
+  onResolveReport,
+  onNavigateToReport,
   onConnect,
   onDisconnect,
   onStartSimulator,
@@ -173,6 +179,120 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
           supply={telemetry.supply}
           mop={telemetry.mop}
         />
+      </div>
+
+      {/* SECTION 2.5: Active Complaints & Live Incident Feed */}
+      <div className="alaya-card p-6 space-y-4 border-[#2F86FF]/35">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#2F86FF]/20 pb-4">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg bg-[#E0525A]/20 border border-[#E0525A]/50 flex items-center justify-center text-[#E0525A]">
+              <AlertTriangle className="w-4 h-4" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <h2 className="font-heading font-black text-lg text-white">
+                  Live Restroom Reports & Complaints
+                </h2>
+                <span className="text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-[#E0525A]/20 text-[#E0525A] border border-[#E0525A]/40">
+                  {activeReports.filter((r) => r.status === 'active').length} Active
+                </span>
+              </div>
+              <p className="text-xs text-[#9AA3B5]">
+                Real-time hygiene issues filed anonymously by students via door QR tags
+              </p>
+            </div>
+          </div>
+
+          <button
+            onClick={onNavigateToReport}
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg font-heading font-semibold text-xs text-[#2F86FF] hover:text-white bg-[#2F86FF]/15 hover:bg-[#2F86FF]/30 border border-[#2F86FF]/40 transition-colors self-start sm:self-auto cursor-pointer"
+          >
+            <PlusCircle className="w-3.5 h-3.5" />
+            <span>File New Report</span>
+          </button>
+        </div>
+
+        {/* Reports List */}
+        {activeReports.length === 0 ? (
+          <div className="py-8 text-center text-xs font-mono text-[#9AA3B5] space-y-1">
+            <CheckCircle2 className="w-6 h-6 text-[#3BB54A] mx-auto mb-2 opacity-80" />
+            <p className="text-white font-medium">All Restrooms In Good Condition</p>
+            <p className="text-[11px] text-[#9AA3B5]/70">Zero unresolved complaints filed by students.</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+            {activeReports.map((report) => {
+              const isResolved = report.status === 'resolved';
+              return (
+                <div
+                  key={report.id}
+                  className={`p-4 rounded-xl border transition-all flex flex-col justify-between gap-3 ${
+                    isResolved
+                      ? 'bg-[#060B1C]/50 border-white/5 opacity-60'
+                      : 'bg-[#0A1433] border-[#2F86FF]/40 shadow-lg'
+                  }`}
+                >
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between text-[11px] font-mono">
+                      <span className="text-[#9AA3B5]">#{report.id}</span>
+                      <span className="text-[#9AA3B5] flex items-center gap-1">
+                        <Clock className="w-3 h-3 text-[#2F86FF]" />
+                        {report.time}
+                      </span>
+                    </div>
+
+                    <div className="font-heading font-bold text-sm text-white flex items-center gap-1.5">
+                      <span
+                        className={`w-2 h-2 rounded-full ${
+                          isResolved
+                            ? 'bg-[#3BB54A]'
+                            : report.severity === 'urgent'
+                            ? 'bg-[#E0525A] animate-pulse'
+                            : 'bg-[#F5B301]'
+                        }`}
+                      />
+                      <span>{report.categoryLabel}</span>
+                    </div>
+
+                    <div className="flex items-center gap-1 text-xs text-[#9AA3B5] font-mono">
+                      <MapPin className="w-3 h-3 text-[#2F86FF] shrink-0" />
+                      <span className="truncate">{report.location}</span>
+                    </div>
+
+                    {report.notes && (
+                      <p className="text-xs text-white/80 bg-[#060B1C] p-2 rounded-md italic border border-white/5">
+                        "{report.notes}"
+                      </p>
+                    )}
+                  </div>
+
+                  <div className="pt-2 border-t border-white/5 flex items-center justify-between">
+                    <span
+                      className={`text-[10px] font-mono uppercase font-bold px-2 py-0.5 rounded ${
+                        isResolved
+                          ? 'bg-[#3BB54A]/20 text-[#3BB54A]'
+                          : 'bg-[#E0525A]/20 text-[#E0525A]'
+                      }`}
+                    >
+                      {isResolved ? 'Resolved' : 'Needs Action'}
+                    </span>
+
+                    {!isResolved && (
+                      <button
+                        onClick={() => onResolveReport(report.id)}
+                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-[#3BB54A]/20 hover:bg-[#3BB54A]/30 text-[#3BB54A] border border-[#3BB54A]/40 text-xs font-mono font-semibold transition-colors cursor-pointer"
+                        title="Mark issue as cleaned / resolved"
+                      >
+                        <Check className="w-3 h-3" />
+                        <span>Mark Resolved</span>
+                      </button>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
 
       {/* SECTION 3: Cleaning Verification & Live Recharts Chart */}

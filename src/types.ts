@@ -44,3 +44,15 @@ export interface CleaningResultConfig {
   isVerified: boolean;
   statusType: 'success' | 'warning' | 'error' | 'neutral';
 }
+
+export interface ActiveReportItem {
+  id: string;
+  category: string;
+  categoryLabel: string;
+  location: string;
+  notes: string;
+  time: string;
+  timestamp: number;
+  severity: 'urgent' | 'high' | 'medium';
+  status: 'active' | 'resolved';
+}
